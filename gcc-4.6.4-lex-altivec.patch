@@ -1,0 +1,12 @@
+diff -up gcc-4.6.4/libcpp/lex.c.orig gcc-4.6.4/libcpp/lex.c
+--- gcc-4.6.4/libcpp/lex.c.orig	2022-06-16 22:20:53.943886373 +0200
++++ gcc-4.6.4/libcpp/lex.c	2022-06-16 22:21:31.889348561 +0200
+@@ -513,7 +513,7 @@ init_vectorized_lexer (void)
+   search_line_fast = impl;
+ }
+ 
+-#elif (GCC_VERSION >= 4005) && defined(__ALTIVEC__)
++#elif (GCC_VERSION >= 4005) && defined(__ALTIVEC__) && defined(__BIG_ENDIAN__)
+ 
+ /* A vection of the fast scanner using AltiVec vectorized byte compares.  */
+ /* ??? Unfortunately, attribute(target("altivec")) is not yet supported,
