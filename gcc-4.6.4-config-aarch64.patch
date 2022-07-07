@@ -1,0 +1,13 @@
+diff -up gcc-4.6.4/config.sub.orig gcc-4.6.4/config.sub
+--- gcc-4.6.4/config.sub.orig	2022-07-07 20:48:38.040999774 +0200
++++ gcc-4.6.4/config.sub	2022-07-07 20:49:02.000856211 +0200
+@@ -423,6 +423,9 @@ case $basic_machine in
+ 		basic_machine=a29k-amd
+ 		os=-udi
+ 		;;
++	aarch64-*)
++		basic_machine=aarch64-`echo $basic_machine | sed 's/^[^-]*-//'`
++		;;
+     	abacus)
+ 		basic_machine=abacus-unknown
+ 		;;

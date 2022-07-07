@@ -5,14 +5,15 @@
 Summary:        MiNT cross-compiler (GCC) for C.
 Name:           m68k-atari-mint-gcc
 Version:        4.6.4
-Release:        1%{?dist}
+Release:        3%{?dist}
 License:        GPLv3+ and GPLv3+ with exceptions and GPLv2+ with exceptions
-Group:          Development/Languages
 URL:            http://gcc.gnu.org
 Source0:        https://ftp.gnu.org/pub/gnu/gcc/gcc-%{version}/gcc-%{version}.tar.bz2
 Patch0:         http://vincent.riviere.free.fr/soft/m68k-atari-mint/archives/gcc-%{version}-mint-%{patchdate}.patch.bz2
 # fix ppc64le build - Altivec routine in libcpp works only on big endian systems
 Patch1:         gcc-4.6.4-lex-altivec.patch
+# fix aarch64 detection
+Patch2:         gcc-4.6.4-config-aarch64.patch
 
 BuildRequires:  m68k-atari-mint-binutils
 %if ! 0%{?bootstrap}
@@ -43,6 +44,7 @@ MiNT cross-compiler (GCC) for C.
 %setup -q -n gcc-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 
 %build
@@ -136,6 +138,9 @@ find $RPM_BUILD_ROOT -name '*.la' -delete
 
 
 %changelog
+* Thu Jul 07 2022 Dan Horák <dan[at]danny.cz> - 4.6.4-3
+- fix aarch64 host detection
+
 * Thu Jun 16 2022 Dan Horák <dan[at]danny.cz> - 4.6.4-2
 - update to 20200504 patch
 - fix build on ppc64le host
