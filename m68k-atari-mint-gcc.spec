@@ -1,11 +1,11 @@
-%global bootstrap 1
+%global bootstrap 0
 %global __os_install_post /usr/lib/rpm/brp-compress %{nil}
 %global patchdate 20200504
 
 Summary:        MiNT cross-compiler (GCC) for C.
 Name:           m68k-atari-mint-gcc
 Version:        4.6.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv3+ and GPLv3+ with exceptions and GPLv2+ with exceptions
 URL:            http://gcc.gnu.org
 Source0:        https://ftp.gnu.org/pub/gnu/gcc/gcc-%{version}/gcc-%{version}.tar.bz2
@@ -138,6 +138,9 @@ find $RPM_BUILD_ROOT -name '*.la' -delete
 
 
 %changelog
+* Sun Jul 10 2022 Dan Horák <dan[at]danny.cz> - 4.6.4-4
+- non-bootstrap build with g++ enabled
+
 * Thu Jul 07 2022 Dan Horák <dan[at]danny.cz> - 4.6.4-3
 - fix aarch64 host detection
 
