@@ -5,7 +5,7 @@
 Summary:        MiNT cross-compiler (GCC) for C.
 Name:           m68k-atari-mint-gcc
 Version:        4.6.4
-Release:        4%{?dist}
+Release:        5%{?dist}
 License:        GPLv3+ and GPLv3+ with exceptions and GPLv2+ with exceptions
 URL:            http://gcc.gnu.org
 Source0:        https://ftp.gnu.org/pub/gnu/gcc/gcc-%{version}/gcc-%{version}.tar.bz2
@@ -17,6 +17,7 @@ Patch2:         gcc-4.6.4-config-aarch64.patch
 
 BuildRequires:  m68k-atari-mint-binutils
 %if ! 0%{?bootstrap}
+# always build GCC with MiNTlib, libcmini isn't complete enough
 BuildRequires:  m68k-atari-mint-mintlib
 BuildRequires:  m68k-atari-mint-pml
 %endif
@@ -31,7 +32,8 @@ BuildRequires:  flex
 
 Requires:       m68k-atari-mint-binutils
 %if ! 0%{?bootstrap}
-Requires:       m68k-atari-mint-mintlib
+# allow runtime with MiNTlib or libcmini
+Requires:       m68k-atari-mint-libc
 Requires:       m68k-atari-mint-pml
 %endif
 
@@ -138,6 +140,9 @@ find $RPM_BUILD_ROOT -name '*.la' -delete
 
 
 %changelog
+* Fri Jun 30 2023 Dan Horák <dan[at]danny.cz> - 4.6.4-5
+- Require generic libc package
+
 * Sun Jul 10 2022 Dan Horák <dan[at]danny.cz> - 4.6.4-4
 - non-bootstrap build with g++ enabled
 
